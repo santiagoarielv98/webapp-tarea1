@@ -51,51 +51,52 @@ public class FormServlet extends HttpServlet {
 			errores.add("debe seleccionar un idioma");
 		}
 
-		PrintWriter out = resp.getWriter();
-
-
-		out.println("<!doctype html>");
-		out.println("<html lang=\"en\">");
-		out.println("	<head>");
-		out.println("		<meta charset=\"UTF-8\">");
-		out.println("		<meta name=\"viewport\"\n" +
-				"\t\tcontent=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">");
-		out.println("		<meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">");
-		out.println("		<title>Index Servlet</title>");
-		out.println("	</head>");
-		out.println("	<body>");
-
-		out.println("		<h1>Resultado Form: </h1>");
-
-		out.println("		<ul>");
 		if (errores.isEmpty()) {
+			try (PrintWriter out = resp.getWriter()) {
+				out.println("<!doctype html>");
+				out.println("<html lang=\"en\">");
+				out.println("	<head>");
+				out.println("		<meta charset=\"UTF-8\">");
+				out.println("		<meta name=\"viewport\"\n" +
+						"\t\tcontent=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">");
+				out.println("		<meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">");
+				out.println("		<title>Index Servlet</title>");
+				out.println("	</head>");
+				out.println("	<body>");
 
-			out.println("			<li>Username: " + username + "</li>");
-			out.println("			<li>Password: " + password + "</li>");
-			out.println("			<li>Email: " + email + "</li>");
-			out.println("			<li>Pais: " + pais + "</li>");
-			out.println("			<li><ul>");
-			for (String lenguaje : lenguajes) {
-				out.println("				<li>" + lenguaje + "</li>");
-			}
-			out.println("			</ul></li>");
-			out.println("			<li><ul>");
-			for (String rol : roles) {
-				out.println("				<li>" + rol + "</li>");
-			}
-			out.println("			</ul></li>");
-			out.println("		<li>Idioma:" + idioma + "</li>");
-			out.println("		<li>Habilitado: " + habilitar + "</li>");
-			out.println("		<li>Secreto: " + secreto + "</li>");
-		} else {
-			errores.forEach(error -> out.println("<li>" + error + "</li>"));
-			out.println("<p> <a href=\"/webapp-tarea1/form.html\"> volver </a> </p>");
+				out.println("		<h1>Resultado Form: </h1>");
+
+				out.println("		<ul>");
+
+				out.println("			<li>Username: " + username + "</li>");
+				out.println("			<li>Password: " + password + "</li>");
+				out.println("			<li>Email: " + email + "</li>");
+				out.println("			<li>Pais: " + pais + "</li>");
+				out.println("			<li><ul>");
+				for (String lenguaje : lenguajes) {
+					out.println("				<li>" + lenguaje + "</li>");
+				}
+				out.println("			</ul></li>");
+				out.println("			<li><ul>");
+				for (String rol : roles) {
+					out.println("				<li>" + rol + "</li>");
+				}
+				out.println("			</ul></li>");
+				out.println("		<li>Idioma:" + idioma + "</li>");
+				out.println("		<li>Habilitado: " + habilitar + "</li>");
+				out.println("		<li>Secreto: " + secreto + "</li>");
+				out.println("		</ul>");
+
+				out.println("	</body>");
+				out.println("</html>");
 		}
+		} else {
+			/* errores.forEach(error -> out.println("<li>" + error + "</li>"));
+			out.println("<p> <a href=\"/webapp-tarea1/form.jsp\"> volver </a> </p>");*/
+			req.setAttribute("errores", errores);
+			getServletContext().getRequestDispatcher("/index.jsp")
+					.forward(req, resp);
 
-		out.println("		</ul>");
-
-		out.println("	</body>");
-		out.println("</html>");
-		out.close();
+		}
 	}
 }
