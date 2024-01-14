@@ -4,6 +4,12 @@
     <groupId>com.svillanueva</groupId>
     <artifactId>webapp-tarea1</artifactId>
     <packaging>war</packaging>
+    <properties>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
     <version>1.0-SNAPSHOT</version>
     <name>webapp-tarea1 Maven Webapp</name>
     <url>http://maven.apache.org</url>
@@ -37,6 +43,14 @@
                     <url>http://localhost:8080/manager/text</url>
                     <username>admin</username>
                     <password>1234</password>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
         </plugins>
